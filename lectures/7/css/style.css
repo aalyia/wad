@@ -1,6 +1,19 @@
 #main {
+
     /* add CSS here */
+	
 }
 .pet {
     /* add CSS here */
+	border: thick double #fa0548;
+	border width:300;
+	border height:400;
+	 cursor: pointer;
+	 -webkit-box-shadow: -91px -56px 5px -30px rgba(0,0,0,0.79);
+-moz-box-shadow: -91px -56px 5px -30px rgba(0,0,0,0.79);
+box-shadow: -91px -56px 5px -30px rgba(0,0,0,0.79);
+Copy Text
+
+
+	
 }
