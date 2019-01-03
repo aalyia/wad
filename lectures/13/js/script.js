@@ -1,5 +1,4 @@
-var questions = [
-    {
+var questions = [{
     question : "When a user views a page containing a JavaScript program, which machine actually executes the script?",
     choices : [ "The User's machine running a Web browser",
         "The Web server",
@@ -15,11 +14,25 @@ var questions = [
     correctAnswer : 2
 },{
     question : "Using _______ statement is how you test for a specific condition",
-    choices : [ "select",
+    choices : [
         "if",
         "for",
         "none of the above"],
     correctAnswer : 1
+}, {
+    question: "What is the color of a reddish?",
+    choices: [ "green",
+        "red",
+        "black",
+        "white"],
+    correctAnswer: 3
+} ,{
+    question : "Who is the founder of pakistan?",
+    choices : ["Gandhi",
+        "Allama iqbal",
+        "Quaid e Azam",
+        "Donald Trump"],
+    correctAnswer : 2
 }];
 
 var currentQuestion = 0;
@@ -28,56 +41,38 @@ var quizOver = false;
 displayCurrentQuestion();
 document.getElementById("quiz-message").style.display = 'none';
 function displayNext() {
-    if(!quizOver){
-        var selectedValue = null;
-        if(document.querySelector('input[name="dq"]:checked') !== null)
-            selectedValue = document.querySelector('input[name="dq"]:checked').value;
-        if (selectedValue == null) {
-            document.getElementById("quiz-message").innerText = "Please selected an answer"
-            document.getElementById("quiz-message").style.display = 'block';
-        } else{
-            document.getElementById("quiz-message").style.display = 'none';
-            if(selectedValue == questions[currentQuestion].correctAnswer){
-                correctAnswers++;
-            }
-            currentQuestion++;
-            if(currentQuestion < questions.length){
-                displayCurrentQuestion();
-            }
-            else {
-                displayScore();
-                document.getElementById("next-btn").innerText = "Play Again?"
-                quizOver = true;
-            }
-        }
-    } else {
-        quizOver = false;
-        document.getElementById("next-btn").innerText = "Next Question";
-        resetQuiz();
-        displayCurrentQuestion();
-        hideScore();
-    }
+    currentQuestion=currentQuestion+1;
+    if(questions.length==currentQuestion)
+        displayScore();
+    displayCurrentQuestion();
 }
-
 function displayCurrentQuestion() {
-    var question = questions[currentQuestion].question;
-    var questionId = document.getElementById("question");
-    var choiceList = document.getElementById("choice-list");
-    var numChoices = questions[currentQuestion].choices.length;
-
-    questionId.innerText = question;
-    choiceList.innerHTML = "";
-    var choice;
-    for(var i=0; i<numChoices; i++){
-        choice = questions[currentQuestion].choices[i];
-        choiceList.innerHTML += "<li><input type='radio' value='"+i+"' name='dq'>" + choice + "</li>";
+    var myQuestion = document.getElementById("question");
+    var answer = document.getElementById("choice-list");
+    myQuestion.innerText = questions[currentQuestion].question;
+    answer.innerHTML = "";
+    for(var i = 0;i<questions[currentQuestion].choices.length;i++) {
+        answer.innerHTML += "<li>" + "<input type=radio name = option value = questions[currentQuestion].choices[i]>" + questions[currentQuestion].choices[i] + "</li>";
+        if (document.querySelector("input[type=radio]:checked") == questions[currentQuestion].correctAnswer)
+        {
+            correctAnswers = correctAnswers + 1;
+        }
+        if(document.querySelector("input[type=radio]:checked")==false)
+        {
+            alert('Please answer question '+i);
+        }
     }
 }
-
 function resetQuiz() {
     currentQuestion = 0;
     correctAnswers = 0;
+    displayCurrentQuestion();
+    displayScore();
     hideScore();
+}
+function displayerror()
+{
+
 }
 function displayScore() {
     document.getElementById("result").innerHTML = "you scored: " + correctAnswers + " out of: " + questions.length;
