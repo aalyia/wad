@@ -59,7 +59,7 @@ function dt() {
 
     console.log(person.firstName + " is " + person.age + " years old.");
 
-    console.log(typeof "John");              // Returns "string"
+    console.log    (typeof "John");              // Returns "string"
     console.log(typeof 3.14);                // Returns "number"
     console.log(typeof true);               // Returns "boolean"
     console.log(typeof false);              // Returns "boolean"
